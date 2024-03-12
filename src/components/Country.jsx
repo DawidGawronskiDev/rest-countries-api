@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import CountryInfo from "./CountryInfo";
 import FlagImage from "./FlagImage";
 
@@ -12,13 +13,12 @@ const Country = ({ country }) => {
   } = country;
 
   return (
-    <li className="rounded-xl overflow-hidden w-[100%] bg-blue-300">
-      <FlagImage image={flagImage} />
-      <div className="p-6">
-        <h2>{commonName}</h2>
-        <CountryInfo info={{ population, region, capital }} />
-      </div>
-    </li>
+    <Link to={`/name/${commonName}`}>
+      <li className="rounded-xl overflow-hidden w-[100%] shadow bg-white">
+        <FlagImage image={flagImage} contained={true} />
+        <CountryInfo info={{ population, region, capital, commonName }} />
+      </li>
+    </Link>
   );
 };
 
