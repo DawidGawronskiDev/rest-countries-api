@@ -1,6 +1,8 @@
-import { useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
 import CountriesList from "../components/CountriesList";
 import Search from "../components/Search";
+import SearchWrapper from "../components/SearchWrapper";
+import { Suspense } from "react";
 
 interface Country {
   name: {
@@ -116,6 +118,8 @@ export async function loader({ request }: { request: Request }) {
 
   const query = searchTerm ? `name/${searchTerm}` : "all";
 
+  console.log(query);
+
   try {
     const response = await fetch("https://restcountries.com/v3.1/" + query);
 
@@ -141,15 +145,36 @@ export async function loader({ request }: { request: Request }) {
   }
 }
 
+export function ErrorBoundary() {
+  return (
+    <main className="text-sm">
+      <SearchWrapper>
+        <Search />
+      </SearchWrapper>
+      <p className="text-red-500 text-center p-4">Failed to fetch countries</p>
+    </main>
+  );
+}
+
+export function CountriesSkeleton() {
+  return <p>Loading...</p>;
+}
+
 export default function MainPage() {
   const countries = useLoaderData() as MappedCountry[];
 
   return (
     <main className="text-sm">
-      <div className="w-11/12 mx-auto">
+      <SearchWrapper>
         <Search />
-      </div>
-      <CountriesList countries={countries} />
+      </SearchWrapper>
+      <Suspense fallback={<CountriesSkeleton />}>
+        <Await resolve={countries}>
+          {(resolvedCountries: MappedCountry[]) => (
+            <CountriesList countries={resolvedCountries} />
+          )}
+        </Await>
+      </Suspense>
     </main>
   );
 }
