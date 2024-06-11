@@ -139,7 +139,7 @@ export default function MainPage() {
   const countries = useLoaderData() as MappedCountry[];
 
   return (
-    <main>
+    <main className="text-sm">
       <CountriesList countries={countries} />
     </main>
   );
