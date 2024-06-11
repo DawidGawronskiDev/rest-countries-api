@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import CountriesList from "../components/CountriesList";
 
 interface Country {
   name: {
@@ -87,6 +88,27 @@ interface Country {
   };
 }
 
+export interface MappedCountry {
+  flags: {
+    png: string;
+    svg: string;
+    alt: string;
+  };
+  name: {
+    common: string;
+    official: string;
+    nativeName: {
+      [key: string]: {
+        official: string;
+        common: string;
+      };
+    };
+  };
+  population: number;
+  region: string;
+  capital: string[];
+}
+
 export async function loader() {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");
@@ -97,13 +119,15 @@ export async function loader() {
 
     const countries = await response.json();
 
-    const mappedCountries = countries.map((country: Country) => ({
-      flags: country.flags,
-      namse: country.name,
-      population: country.population,
-      region: country.region,
-      capital: country.capital,
-    }));
+    const mappedCountries: MappedCountry[] = countries.map(
+      (country: Country) => ({
+        flags: country.flags,
+        name: country.name,
+        population: country.population,
+        region: country.region,
+        capital: country.capital,
+      })
+    );
 
     return mappedCountries;
   } catch (error) {
@@ -112,11 +136,11 @@ export async function loader() {
 }
 
 export default function MainPage() {
-  const countries = useLoaderData();
+  const countries = useLoaderData() as MappedCountry[];
 
   return (
     <main>
-      <h1>Main Page!</h1>
+      <CountriesList countries={countries} />
     </main>
   );
 }
