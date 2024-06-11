@@ -1,12 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import MainPage, { loader as indexLoader } from "../pages/Main";
+import MainPage, { ErrorBoundary } from "../pages/Main";
 import DetailsPage from "../pages/Details";
+import { loader as mainLoader } from "../loaders/mainLoader";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
-    loader: indexLoader,
+    loader: mainLoader,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/:countryId",

@@ -1,4 +1,4 @@
-import { MappedCountry } from "../pages/Main";
+import { MappedCountry } from "../interfaces/mappedCountry";
 
 export default function Item({ country }: { country: MappedCountry }) {
   return (

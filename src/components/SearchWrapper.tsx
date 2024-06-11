@@ -5,5 +5,5 @@ interface SearchWrapperProps {
 }
 
 export default function SearchWrapper({ children }: SearchWrapperProps) {
-  return <div className="w-11/12 mx-auto">{children}</div>;
+  return <div className="w-11/12 max-w-7xl mx-auto">{children}</div>;
 }

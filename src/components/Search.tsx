@@ -1,17 +1,18 @@
 import { useSearchParams } from "react-router-dom";
 import SearchIcon from "./icons/SearchIcon";
 import { useRef } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
 
   // Wrap it in debounce later
-  function handleChange(el: HTMLInputElement): void {
+  const handleChange = useDebouncedCallback((el: HTMLInputElement): void => {
     if (!el.value) {
       setSearchParams({});
     } else setSearchParams({ name: el.value });
-  }
+  }, 300);
 
   function handleFocus(): void {
     ref.current?.focus();
