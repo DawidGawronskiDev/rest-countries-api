@@ -6,12 +6,10 @@ interface CountriesListProps {
 }
 
 export default function CountriesList({ countries }: CountriesListProps) {
-  console.log(countries);
-
   return (
     <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-11/12 max-w-7xl mx-auto gap-10 sm:gap-16">
       {countries.map((country) => (
-        <Item country={country} />
+        <Item key={country.name.common} country={country} />
       ))}
     </ul>
   );
