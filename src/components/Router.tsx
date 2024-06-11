@@ -1,11 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import MainPage from "../pages/Main";
+import MainPage, { loader as indexLoader } from "../pages/Main";
 import DetailsPage from "../pages/Details";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
+    loader: indexLoader,
   },
   {
     path: "/:countryId",
