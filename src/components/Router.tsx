@@ -1,18 +1,27 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import MainPage, { ErrorBoundary } from "../pages/Main";
-import DetailsPage from "../pages/Details";
-import { loader as mainLoader } from "../loaders/mainLoader";
+import MainPage from "../pages/Main";
+import RootLayout from "../pages/Root";
+import CountriesList, { ErrorBoundary } from "./CountriesList";
+import { loader as countryLoader } from "../loaders/countryLoader";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainPage />,
-    loader: mainLoader,
-    errorElement: <ErrorBoundary />,
-  },
-  {
-    path: "/:countryId",
-    element: <DetailsPage />,
+    element: <RootLayout />,
+    children: [
+      {
+        path: "",
+        element: <MainPage />,
+        children: [
+          {
+            path: "",
+            loader: countryLoader,
+            errorElement: <ErrorBoundary />,
+            element: <CountriesList />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

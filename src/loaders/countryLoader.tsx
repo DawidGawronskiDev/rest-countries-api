@@ -8,8 +8,6 @@ export async function loader({ request }: { request: Request }) {
 
   const query = searchTerm ? `name/${searchTerm}` : "all";
 
-  console.log(query);
-
   try {
     const response = await fetch("https://restcountries.com/v3.1/" + query);
 
