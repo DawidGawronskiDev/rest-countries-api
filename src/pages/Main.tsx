@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import CountriesList from "../components/CountriesList";
+import Search from "../components/Search";
 
 interface Country {
   name: {
@@ -109,9 +110,14 @@ export interface MappedCountry {
   capital: string[];
 }
 
-export async function loader() {
+export async function loader({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const searchTerm = url.searchParams.get("name");
+
+  const query = searchTerm ? `name/${searchTerm}` : "all";
+
   try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
+    const response = await fetch("https://restcountries.com/v3.1/" + query);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -140,6 +146,9 @@ export default function MainPage() {
 
   return (
     <main className="text-sm">
+      <div className="w-11/12 mx-auto">
+        <Search />
+      </div>
       <CountriesList countries={countries} />
     </main>
   );
