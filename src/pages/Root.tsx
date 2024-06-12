@@ -10,7 +10,7 @@ export default function RootLayout() {
   return (
     <div
       className={clsx(
-        "flex flex-col gap-6 md:gap-12 min-h-[calc(100vh)] dark:bg-blue-very-dark dark:text-white",
+        "flex flex-col gap-6 md:gap-12 min-h-[calc(100vh)] bg-gray-very-light dark:bg-blue-very-dark dark:text-white",
         {
           dark: mode === "dark",
         }

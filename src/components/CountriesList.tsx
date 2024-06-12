@@ -3,9 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import Item from "./CountriesListItem";
 import { MappedCountry } from "../interfaces/mappedCountry";
 import Wrapper from "./Wrapper";
+import { useEffect, useState } from "react";
 
-const getCountries = async (term: string | null) => {
-  const query = term ? `name/${term}` : "all";
+const getCountries = async (name: string | null) => {
+  const query = name ? `name/${name}` : "all";
 
   try {
     const response = await fetch("https://restcountries.com/v3.1/" + query);
@@ -44,23 +45,41 @@ export default function CountriesList({
 }: {
   searchParams: URLSearchParams;
 }) {
-  const term = searchParams.get("name");
+  const name = searchParams.get("name");
+  const region = searchParams.get("region");
+
+  const [filteredCountries, setFilteredCountries] = useState<MappedCountry[]>(
+    []
+  );
 
   const {
-    isPending,
+    isLoading,
     isError,
     error,
     data: countries,
   } = useQuery({
-    queryKey: ["countries", term],
-    queryFn: () => getCountries(term),
+    queryKey: ["countries", name],
+    queryFn: () => getCountries(name),
   });
+
+  useEffect(() => {
+    if (typeof countries !== "undefined" && typeof countries !== "string") {
+      if (region) {
+        const filtered = countries.filter(
+          (country) => country.region === region
+        );
+        setFilteredCountries(filtered);
+      } else {
+        setFilteredCountries(countries);
+      }
+    }
+  }, [countries, region]);
 
   if (isError) {
     return <p>{error.message}</p>;
   }
 
-  if (isPending) {
+  if (isLoading) {
     return <CountriesSkeleton />;
   }
 
@@ -68,8 +87,8 @@ export default function CountriesList({
     return (
       <Wrapper>
         <ul className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {countries.map((country: MappedCountry) => (
-            <Item country={country} />
+          {filteredCountries.map((country: MappedCountry) => (
+            <Item key={country.name.common} country={country} />
           ))}
         </ul>
       </Wrapper>
