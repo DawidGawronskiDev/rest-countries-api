@@ -14,7 +14,7 @@ export default {
         // Light Mode Input
         "gray-dark": "hsl(0, 0%, 52%)",
         // Light Mode Background
-        "gray-very-light-lm": "hsl(0, 0%, 98%)",
+        "gray-very-light": "hsl(0, 0%, 98%)",
         // Dark Mode Text & Light Mode Elements
         white: " hsl(0, 0%, 100%)",
       },
