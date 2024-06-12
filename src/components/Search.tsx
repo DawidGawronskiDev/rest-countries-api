@@ -4,8 +4,13 @@ import SearchIcon from "./icons/SearchIcon";
 const Search = forwardRef(function Search(
   {
     onChange,
+    onClick,
     searchParams,
-  }: { onChange: () => void; searchParams: URLSearchParams },
+  }: {
+    onChange: () => void;
+    onClick: () => void;
+    searchParams: URLSearchParams;
+  },
   ref: Ref<HTMLInputElement>
 ) {
   const inputValue = searchParams.get("name") || "";
@@ -13,7 +18,7 @@ const Search = forwardRef(function Search(
   return (
     <div className="shadow rounded max-w-xl">
       <div className="flex gap-6 px-8 py-4">
-        <button>
+        <button onClick={onClick}>
           <SearchIcon />
         </button>
         <input

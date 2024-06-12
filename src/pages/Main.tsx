@@ -12,14 +12,23 @@ export default function MainPage() {
 
   const handleChange = () => {
     ref.current?.value
-      ? setSearchParams({ name: ref.current.value })
+      ? setSearchParams({ name: ref.current.value.trim() })
       : setSearchParams({});
+  };
+
+  const handleFocus = () => {
+    ref.current?.focus();
   };
 
   return (
     <main className="text-sm">
       <SearchWrapper>
-        <Search ref={ref} onChange={handleChange} searchParams={searchParams} />
+        <Search
+          ref={ref}
+          onChange={handleChange}
+          onClick={handleFocus}
+          searchParams={searchParams}
+        />
       </SearchWrapper>
       <CountriesList searchParams={searchParams} />
     </main>
