@@ -21,7 +21,7 @@ export default function MainPage() {
   };
 
   return (
-    <main className="text-sm">
+    <main className="text-sm grid gap-6 md:gap-12">
       <Wrapper>
         <Search
           ref={ref}

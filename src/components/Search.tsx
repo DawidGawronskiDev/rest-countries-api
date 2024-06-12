@@ -16,7 +16,7 @@ const Search = forwardRef(function Search(
   const inputValue = searchParams.get("name") || "";
 
   return (
-    <div className="shadow rounded max-w-xl">
+    <div className="shadow rounded max-w-xl dark:bg-blue-dark">
       <div className="flex gap-6 px-8 py-4">
         <button onClick={onClick}>
           <SearchIcon />
@@ -24,10 +24,10 @@ const Search = forwardRef(function Search(
         <input
           type="text"
           placeholder="Search for a country..."
-          className="w-full"
           ref={ref}
           onChange={onChange}
           value={inputValue}
+          className="w-full dark:bg-blue-dark"
         />
       </div>
     </div>
