@@ -4,7 +4,7 @@ export default function ThemeToggle() {
   return (
     <button className="flex gap-2">
       <MoonIcon />
-      <p>Dark Mode</p>
+      <p className="text-base font-semibold">Dark Mode</p>
     </button>
   );
 }
