@@ -1,37 +1,32 @@
-import { useSearchParams } from "react-router-dom";
+import { Ref, forwardRef } from "react";
 import SearchIcon from "./icons/SearchIcon";
-import { useRef } from "react";
-import { useDebouncedCallback } from "use-debounce";
 
-export default function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const ref = useRef<HTMLInputElement>(null);
-
-  // Wrap it in debounce later
-  const handleChange = useDebouncedCallback((el: HTMLInputElement): void => {
-    if (!el.value) {
-      setSearchParams({});
-    } else setSearchParams({ name: el.value });
-  }, 300);
-
-  function handleFocus(): void {
-    ref.current?.focus();
-  }
+const Search = forwardRef(function Search(
+  {
+    onChange,
+    searchParams,
+  }: { onChange: () => void; searchParams: URLSearchParams },
+  ref: Ref<HTMLInputElement>
+) {
+  const inputValue = searchParams.get("name") || "";
 
   return (
     <div className="shadow rounded max-w-xl">
       <div className="flex gap-6 px-8 py-4">
-        <button onClick={handleFocus}>
+        <button>
           <SearchIcon />
         </button>
         <input
           type="text"
-          onChange={(e) => handleChange(e.target)}
           placeholder="Search for a country..."
-          ref={ref}
           className="w-full"
+          ref={ref}
+          onChange={onChange}
+          value={inputValue}
         />
       </div>
     </div>
   );
-}
+});
+
+export default Search;
