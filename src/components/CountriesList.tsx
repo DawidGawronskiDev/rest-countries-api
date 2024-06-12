@@ -2,6 +2,7 @@ import { type Country } from "../interfaces/country";
 import { useQuery } from "@tanstack/react-query";
 import Item from "./CountriesListItem";
 import { MappedCountry } from "../interfaces/mappedCountry";
+import Wrapper from "./Wrapper";
 
 const getCountries = async (term: string | null) => {
   const query = term ? `name/${term}` : "all";
@@ -65,23 +66,27 @@ export default function CountriesList({
 
   if (typeof countries !== "undefined" && typeof countries !== "string") {
     return (
-      <ul className="w-11/12 max-w-7xl mx-auto grid gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {countries.map((country: MappedCountry) => (
-          <Item country={country} />
-        ))}
-      </ul>
+      <Wrapper>
+        <ul className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {countries.map((country: MappedCountry) => (
+            <Item country={country} />
+          ))}
+        </ul>
+      </Wrapper>
     );
   }
 }
 
 function CountriesSkeleton() {
   return (
-    <ul className="w-11/12 max-w-7xl mx-auto grid gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div className="bg-gray-300 animate-pulse h-72 rounded"></div>
-      <div className="bg-gray-300 animate-pulse h-72 rounded"></div>
-      <div className="bg-gray-300 animate-pulse h-72 rounded hidden sm:block"></div>
-      <div className="bg-gray-300 animate-pulse h-72 rounded hidden lg:block"></div>
-      <div className="bg-gray-300 animate-pulse h-72 rounded hidden lg:block"></div>
-    </ul>
+    <Wrapper>
+      <ul className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="bg-gray-300 animate-pulse h-72 rounded"></div>
+        <div className="bg-gray-300 animate-pulse h-72 rounded"></div>
+        <div className="bg-gray-300 animate-pulse h-72 rounded hidden sm:block"></div>
+        <div className="bg-gray-300 animate-pulse h-72 rounded hidden lg:block"></div>
+        <div className="bg-gray-300 animate-pulse h-72 rounded hidden lg:block"></div>
+      </ul>
+    </Wrapper>
   );
 }

@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "react-router-dom";
 import Search from "../components/Search";
-import SearchWrapper from "../components/SearchWrapper";
 import { useRef } from "react";
 import CountriesList from "../components/CountriesList";
+import Wrapper from "../components/Wrapper";
 
 export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,14 +22,14 @@ export default function MainPage() {
 
   return (
     <main className="text-sm">
-      <SearchWrapper>
+      <Wrapper>
         <Search
           ref={ref}
           onChange={handleChange}
           onClick={handleFocus}
           searchParams={searchParams}
         />
-      </SearchWrapper>
+      </Wrapper>
       <CountriesList searchParams={searchParams} />
     </main>
   );
