@@ -1,19 +1,28 @@
-"use client";
-
 import { useSearchParams } from "react-router-dom";
 import Search from "../components/Search";
 import { useRef } from "react";
 import CountriesList from "../components/CountriesList";
 import Wrapper from "../components/Wrapper";
+import Filter from "../components/Filter";
 
 export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
 
-  const handleChange = () => {
+  const handleSearch = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
     ref.current?.value
-      ? setSearchParams({ name: ref.current.value.trim() })
-      : setSearchParams({});
+      ? newSearchParams.set("name", ref.current.value.trim())
+      : newSearchParams.delete("name");
+    setSearchParams(newSearchParams);
+  };
+
+  const handleFilter = (region: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    region
+      ? newSearchParams.set("region", region)
+      : newSearchParams.delete("region");
+    setSearchParams(newSearchParams);
   };
 
   const handleFocus = () => {
@@ -23,12 +32,15 @@ export default function MainPage() {
   return (
     <main className="text-sm grid gap-6 md:gap-12">
       <Wrapper>
-        <Search
-          ref={ref}
-          onChange={handleChange}
-          onClick={handleFocus}
-          searchParams={searchParams}
-        />
+        <div className="flex flex-col md:flex-row justify-between gap-12 *:flex-1">
+          <Search
+            ref={ref}
+            onChange={handleSearch}
+            onClick={handleFocus}
+            searchParams={searchParams}
+          />
+          <Filter onClick={handleFilter} searchParams={searchParams} />
+        </div>
       </Wrapper>
       <CountriesList searchParams={searchParams} />
     </main>
