@@ -2,7 +2,7 @@ import { MappedCountry } from "../interfaces/mappedCountry";
 
 export default function Item({ country }: { country: MappedCountry }) {
   return (
-    <li className="rounded overflow-hidden border dark:border-none dark:bg-blue-dark shadow-sm">
+    <li className="rounded overflow-hidden border dark:border-none bg-white dark:bg-blue-dark shadow-sm">
       <div className="aspect-video">
         <img
           src={country.flags.svg}
