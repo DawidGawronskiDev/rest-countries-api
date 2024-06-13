@@ -10,9 +10,12 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button onClick={handleClick} className="flex gap-2">
+    <button
+      onClick={handleClick}
+      className="flex gap-2 items-center justify-center"
+    >
       <MoonIcon />
-      <p className="text-base font-semibold">Dark Mode</p>
+      <p className="text-sm sm:text-base font-semibold">Dark Mode</p>
     </button>
   );
 }
