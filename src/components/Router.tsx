@@ -1,15 +1,23 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from "../pages/Main";
 import RootLayout from "../pages/Root";
+import DetailsPage, { loader as detailLoader } from "../pages/Details";
+import ErrorPage from "../pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <MainPage />,
+      },
+      {
+        path: "country/:countryName",
+        loader: detailLoader,
+        element: <DetailsPage />,
       },
     ],
   },
