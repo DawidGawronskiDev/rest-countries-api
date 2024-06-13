@@ -1,7 +1,6 @@
 import BackIcon from "./icons/BackIcon";
 
 export default function ButtonBack() {
-  console.log(history);
   return (
     <button
       onClick={() => history.back()}

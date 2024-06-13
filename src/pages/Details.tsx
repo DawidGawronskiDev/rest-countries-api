@@ -117,11 +117,8 @@ export default function DetailsPage() {
                   {borderCountries.length > 0 ? (
                     <ul className="flex gap-2 text-xs sm:text-sm flex-wrap">
                       {borderCountries.map((country) => (
-                        <Link to={"/country/" + country}>
-                          <li
-                            key={country}
-                            className="shadow px-4 py-1 bg-white dark:bg-blue-dark"
-                          >
+                        <Link key={country} to={"/country/" + country}>
+                          <li className="shadow px-4 py-1 bg-white dark:bg-blue-dark">
                             {country}
                           </li>
                         </Link>
