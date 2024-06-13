@@ -6,12 +6,12 @@ import ErrorPage from "../pages/Error";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/rest-countries-api",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <MainPage />,
       },
       {

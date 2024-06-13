@@ -4,7 +4,7 @@ import { MappedCountry } from "../interfaces/mappedCountry";
 export default function Item({ country }: { country: MappedCountry }) {
   return (
     <li className="rounded overflow-hidden border dark:border-none bg-white dark:bg-blue-dark shadow-sm">
-      <Link to={`/country/${country.name.common}`}>
+      <Link to={`/rest-countries-api/country/${country.name.common}`}>
         <div className="aspect-[16/10]">
           <img
             src={country.flags.svg}

@@ -22,7 +22,7 @@ export default function ErrorPage() {
         <p className="opacity-50">
           <i>{error.statusText || error.message}</i>
         </p>
-        <Link to="/">
+        <Link to="/rest-countries-api">
           <button className="shadow px-4 py-2 rounded">Main Page</button>
         </Link>
       </div>

@@ -117,7 +117,10 @@ export default function DetailsPage() {
                   {borderCountries.length > 0 ? (
                     <ul className="flex gap-2 text-xs sm:text-sm flex-wrap">
                       {borderCountries.map((country) => (
-                        <Link key={country} to={"/country/" + country}>
+                        <Link
+                          key={country}
+                          to={"/rest-countries-api/country/" + country}
+                        >
                           <li className="shadow px-4 py-1 bg-white dark:bg-blue-dark">
                             {country}
                           </li>
