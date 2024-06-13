@@ -26,13 +26,18 @@ export default function Filter({
   return (
     <div
       onClick={handleClick}
-      className="px-6 py-4 shadow relative rounded max-w-52 h-14 bg-white dark:bg-blue-dark"
+      className="px-6 py-4 shadow relative rounded max-w-52 h-14 bg-white dark:bg-blue-dark cursor-pointer flex items-center"
     >
       <p>{region ? region : "Filter by Region"}</p>
       {isOpen && (
         <ul className="flex flex-col gap-2 absolute w-full px-6 py-4 bg-white dark:bg-blue-dark shadow rounded top-full left-0 mt-2 cursor-pointer">
           {regions.map((region) => (
-            <li onClick={() => onClick(region.value)}>{region.name}</li>
+            <li
+              onClick={() => onClick(region.value)}
+              className="hover:bg-black/5 p-2 rounded"
+            >
+              {region.name}
+            </li>
           ))}
         </ul>
       )}
