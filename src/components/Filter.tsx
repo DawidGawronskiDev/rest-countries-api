@@ -26,7 +26,7 @@ export default function Filter({
   return (
     <div
       onClick={handleClick}
-      className="px-6 py-4 shadow relative rounded max-w-52 h-14 bg-white dark:bg-blue-dark cursor-pointer flex items-center"
+      className="px-6 py-4 font-semibold shadow relative rounded max-w-52 h-14 bg-white dark:bg-blue-dark cursor-pointer flex items-center"
     >
       <p>{region ? region : "Filter by Region"}</p>
       {isOpen && (
