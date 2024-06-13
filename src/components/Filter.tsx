@@ -34,6 +34,7 @@ export default function Filter({
           {regions.map((region) => (
             <li
               onClick={() => onClick(region.value)}
+              key={region.name}
               className="hover:bg-black/5 p-2 rounded"
             >
               {region.name}

@@ -34,9 +34,9 @@ export default function MainPage() {
   }, []);
 
   return (
-    <main className="text-sm grid gap-6 md:gap-12">
+    <main className="text-sm grid gap-6 md:gap-12 mb-6 sm:mb-12">
       <Wrapper>
-        <div className="flex flex-col md:flex-row justify-between gap-12 *:flex-1">
+        <div className="flex flex-col md:flex-row justify-between gap-6 *:flex-1">
           <Search
             ref={ref}
             onChange={handleSearch}

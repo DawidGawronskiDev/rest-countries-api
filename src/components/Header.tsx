@@ -8,7 +8,9 @@ export default function Header() {
       <Wrapper>
         <div className="flex items-center justify-between">
           <Link to="/">
-            <h1 className="text-2xl font-extrabold">Where in the world?</h1>
+            <h1 className="text-sm md:text-2xl font-extrabold">
+              Where in the world?
+            </h1>
           </Link>
           <ThemeToggle />
         </div>

@@ -21,7 +21,9 @@ export default function Item({ country }: { country: MappedCountry }) {
             <div>
               <div>
                 <span className="font-semibold">Population: </span>
-                <span className="font-light">{country.population}</span>
+                <span className="font-light">
+                  {country.population.toLocaleString()}
+                </span>
               </div>
               <div>
                 <span className="font-semibold">Region: </span>
