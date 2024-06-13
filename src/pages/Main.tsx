@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import Search from "../components/Search";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import CountriesList from "../components/CountriesList";
 import Wrapper from "../components/Wrapper";
 import Filter from "../components/Filter";
@@ -28,6 +28,10 @@ export default function MainPage() {
   const handleFocus = () => {
     ref.current?.focus();
   };
+
+  useEffect(() => {
+    document.title = "Countries";
+  }, []);
 
   return (
     <main className="text-sm grid gap-6 md:gap-12">
